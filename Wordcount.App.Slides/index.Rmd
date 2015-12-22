@@ -1,0 +1,80 @@
+---
+title       : Wordcount Application Information
+subtitle    : Developing Data Products class JHU Data Science
+author      : Daniel Alaiev
+job         : Student
+framework   : revealjs      # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Introduction
+
+* This application was created for the [Developing Data Products](https://www.coursera.org/learn/data-products) Coursera class
+
+* Ever wondered which words appear more frequently than others in your favorite text? Here's an app for that!
+
+* The app outputs two neat plots that show word frequencies
+
+* You can adjust how many words are plotted and even take out those common "filler" words
+
+---
+
+## First Plot
+
+* You can see the application in action [here](https://datadan01.shinyapps.io/WordCounter)
+
+* The first plot is a bar plot that has the frequencies of various words
+
+* The frequencies are ordered in decreasing order and a slider allows the user to adjust the number of words in both plots
+
+* This is created using [ggplot2](http://ggplot2.org/)
+
+---
+
+## Second Plot
+
+* The second plot outputs a "Word Cloud", created with the [wordcloud package](https://cran.r-project.org/web/packages/wordcloud/wordcloud.pdf)
+
+* This is a graphical representation of relative word frequencies
+
+* The most common words are largest and appear closer to the center
+
+* Words are also colored according to their frequencies
+
+---
+
+## Code Structure
+
+* The clean.word.count function does the heavy lifting for the application
+
+* It starts with making sure that all *https* links are transformed into *http*
+
+* Then it reads the page in and takes out all numbers and punctuation
+
+* The words are finally then checked against a dictionary before being counted
+
+* The next slide has an example of a code snippet
+
+---
+
+## Cleaning Up Scraped Text
+
+```{r}
+text <- c("Th1is. I!s A?n EXA,,.MPLE 0of me3ssY! w00o00r!!ds")
+
+##Get rid of numbers and punctuation. Make everything lower case.
+text<-gsub("[[:punct:]]", "", text)
+text<-gsub("[[:digit:]]", "", text)
+text<-tolower(text)
+    
+##Split large character vector into substrings.
+text<-strsplit(text,split=" ")
+    
+text
+```
+
+---
